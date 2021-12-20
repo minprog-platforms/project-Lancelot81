@@ -16,6 +16,7 @@ The app will also contain some custom scoresheets, which can be used when player
     * Some package to manage a database: SQL and flask, including extra flask modules
     * bootstrap for designing properties and buttons
 * The hardest part of the application will to implement a database which stores game scores.
+* A similar scorsheets web application is has been made for [dice games](http://www.playonlinedicegames.com/scoresheet). However, it does not make use of a database for scores, thus scores are lost after page refresh. A simple scoresheet application can also be found in the [Play Store](https://play.google.com/store/apps/details?id=de.einedigitalewelt.spielblock&hl=nl&gl=US), but it requires the user to download an app.
 
 ## Sketch
 
