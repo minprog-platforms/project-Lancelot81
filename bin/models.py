@@ -49,16 +49,6 @@
 #     cur.execute('INSERT INTO rounds (round_number, game_id) VALUES(?, ?)', [new_round_nm, gamename])
 #     con.commit()
 #     con.close()
-
-
-# Calculates score based on guess and wins
-def calculate_score(guess, wins):
-    if guess == wins:
-        return 6 + guess * 2
-    elif guess > wins:
-        return (wins - guess) * 2
-    else:
-        return (guess - wins) * 2
     
 
 # # Adds player score to the table
