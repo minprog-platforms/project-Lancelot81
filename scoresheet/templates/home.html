@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Bridge Scoresheet</title>
+{% endblock %}
+
+
+{% block body %}
+<h1>Choose and name your game: </h1>
+<form action="/" method="POST" id="game_form">
+    <label>Choose type of game: </label>
+    <select id="gametype" name="gametype">
+        <option value="bridge">Boeren Bridge</option>
+        <option value="toepen">Toepen</option>
+    </select> 
+    <br>
+    <label>Give your game a name: </label>
+    <input type="text" name="gamename" id="gamename" placeholder="Game name"/>
+    <a href="/game"><button type="submit" id="add-game" name="add-game">Add Game</button></a>
+</form>
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

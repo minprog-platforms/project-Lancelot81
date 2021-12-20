@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Bridge Scoresheet</title>
+{% endblock %}
+
+
+{% block body %}
+<h1 class="mt-5" style="text-align: center;">Boeren bridge</h1>
+
+
+{% if not playing %}
+<div class="modal" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Choose players</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" data-target="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <form action="/bridge" method="POST" id="player_form">
+              <label for="add-btn">Insert player name: </label>
+              <input type="text" name="playername" id="playername" placeholder="Player name"/>
+              <button type="submit" id="add-player" name="add-player" value="Add player">Add Player</button>
+            </form>
+          </p>
+          <p id="notification" style="display: none; color: darkgreen;">Succesfully added player!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+</div>
+{% endif %}
+
+<table id="bb-scoresheet">
+    <tr>
+        <th>Round</th>
+        {% for player in players %}
+        <th>{{ player.name }}</th>
+        {% endfor %}
+    </tr>
+    {% for round in rounds: %}
+    <tr>
+        <td>{{ round.round_nm }}</td>
+        {% for score in round.scores %}
+        <td>{{ score.score }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<form action="/bridge" method="POST" id="guesswins">
+    {% for player in players %}
+    <label for="{{ player.name + 'guess' }}">Guess: </label>
+    <select class="guess" id="{{ player.name + 'guess' }}" name="{{ player.name + 'guess' }}" form="guesswins" default=0>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+    <label for="{{ player.name + 'wins' }}">Wins: </label>
+    <select class="wins" id="{{ player.name + 'wins' }}" name="{{ player.name + 'wins' }}" form="guesswins">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+    {% endfor %}
+    <button type="submit" id="add-round" name="add-round" value="Add round">Add round</button>
+</form>
+
+<button type="button" id="endgame" name="endgame" value="End Game" data-toggle="modal" data-target="warning" 
+  onclick="$(document).ready(function() {
+    $('#warning').modal('show')
+    $('#warning').modal(options);
+  });">End Game</button>
+
+<br>
+
+<table id="scores-table">
+  {% for player in players %}
+  <tr>
+      <th>{{ player.name }}</th>
+      <td>{{ totals[player] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="color: crimson;">
+        <h5 class="modal-title">Warning!</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" data-target="warning" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Warning: Ending the game makes it impossible to add any more rounds. <br>
+          Make sure the last round has been added to the game scores.
+        </p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="warning">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="warning" style="color: crimson;" onclick="EndGame()">End Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<form action="/logout" id="newgame" style="display: none;">
+  <button type="submit" value="New game"></button>
+</form>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    $(document).ready(function() {
+        $('#modal').modal('show')
+        $('#modal').modal(options);
+    });
+    $(document).ready( function() {
+      setTimeout(sortTable(document.getElementById('scores-table')), 100);
+    })
+</script>
+{% endblock %}

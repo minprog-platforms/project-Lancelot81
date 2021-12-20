@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Toepen Scoresheet</title>
+{% endblock %}
+
+
+{% block body %}
+<h1 class="mt-5" style="text-align: center;">Toepen</h1>
+{% if not playing %}
+<div class="modal" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Choose players</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <form action="/toepen" method="POST" id="player_form">
+              <label for="add-btn">Insert player name: </label>
+              <input type="text" name="playername" id="playername" placeholder="Player name"/>
+              <button type="submit" id="add-player" name="add-player" value="Add player">Add Player</button>
+            </form>
+          </p>
+          <p id="notification" style="display: none; color: darkgreen;">Succesfully added player!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+</div>
+{% endif %}
+
+<table id="toep-scores">
+    <tr>
+        {% for player in players %}
+        <th>{{ player.name }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for player in players %}
+        <th>{{ player.scores[0].score }}</th>
+        {% endfor %}
+    </tr>    
+</table>
+
+<table id="toep-round">
+    <tr>
+        {% for player in players %}
+        <th>{{ player.name }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for player in players %}
+        <td></td>
+        {% endfor %}
+    </tr>
+</table>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    $(document).ready(function() {
+        $('#modal').modal('show')
+        $('#modal').modal(options);
+    });
+</script>
+{% endblock %}
