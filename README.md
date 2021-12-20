@@ -13,6 +13,20 @@ The app will also contain some custom scoresheets, which can be used when player
 
 * Data sources:
 * External components: 
-    * Some package to manage a database: SQL and flask
+    * Some package to manage a database: SQL and flask, including extra flask modules
     * bootstrap for designing properties and buttons
 * The hardest part of the application will to implement a database which stores game scores.
+
+## Sketch
+
+The application will have a homepage where one can choose the type of game.
+![Homepage and a games scoresheet](doc/projectSketch1.jpg)
+
+A simple bridge scoresheet will have the user input all players guesses and actual wins. Scores will be calculated automatically.
+![Bridge scoresheet](doc/projectSketch2.jpg)
+
+All pages will include a rankings table, where the players total points are shown in order of ranking. The scoresheet for toepen will look something like this.
+![Toepen scoresheet](doc/projectSketch3.jpg)
+
+The application will support mobile!
+![Mobile support](doc/projectSketch4.jpg)
