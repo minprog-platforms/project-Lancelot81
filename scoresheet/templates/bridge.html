@@ -9,6 +9,7 @@
 {% block body %}
 <h1 class="mt-5" style="text-align: center;">Boeren bridge</h1>
 
+<div style="height: 20px;"></div>
 
 {% if not playing %}
 <div class="modal" id="modal" tabindex="-1">
@@ -36,73 +37,96 @@
 </div>
 {% endif %}
 
-<table id="bb-scoresheet">
-    <tr>
-        <th>Round</th>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <table id="bb-scoresheet">
+        <thead>
+          <tr>
+            <th>Round</th>
+            {% for player in players %}
+            <th>{{ player.name }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+          {% for round in rounds: %}
+          <tr>
+              <td>{{ round.round_nm }}</td>
+              {% for score in round.scores %}
+              <td>{{ score.score }}</td>
+              {% endfor %}
+          </tr>
+          {% endfor %}
+          <tr>
+            <td>Current round</td>
+            <form action="/bridge" method="POST" id="guesswins">
+              {% for player in players %}
+              <td>
+                <label for="{{ player.name + 'guess' }}">Guess: </label>
+                <select class="guess" id="{{ player.name + 'guess' }}" name="{{ player.name + 'guess' }}" form="guesswins" default=0>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <br>
+                <label for="{{ player.name + 'wins' }}">Wins: </label>
+                <select class="wins" id="{{ player.name + 'wins' }}" name="{{ player.name + 'wins' }}" form="guesswins">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+              </td>
+              {% endfor %}
+          </form>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div style="text-align: center;">
+        <button type="submit" id="add-round" name="add-round" value="Add round" form="guesswins">Add round</button>
+      
+        <button type="button" id="endgame" name="endgame" value="End Game" data-toggle="modal" data-target="warning" 
+        onclick="$(document).ready(function() {
+          $('#warning').modal('show')
+          $('#warning').modal(options);
+        });">End Game</button>
+      </div>
+      <br>
+    </div>
+
+    <div class="col-sm" style="text-align: center;">
+      <h3>Rankings</h3>
+      <br>
+      <table id="scores-table" onload="sortTable(document.getElementById())" style="margin-right: auto; margin-left: auto;">
         {% for player in players %}
-        <th>{{ player.name }}</th>
+        <tr>
+            <th>{{ player.name }}</th>
+            <td>{{ totals[player] }}</td>
+        </tr>
         {% endfor %}
-    </tr>
-    {% for round in rounds: %}
-    <tr>
-        <td>{{ round.round_nm }}</td>
-        {% for score in round.scores %}
-        <td>{{ score.score }}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-</table>
+      </table>
+    </div>
+  </div>
+</div>
 
-<form action="/bridge" method="POST" id="guesswins">
-    {% for player in players %}
-    <label for="{{ player.name + 'guess' }}">Guess: </label>
-    <select class="guess" id="{{ player.name + 'guess' }}" name="{{ player.name + 'guess' }}" form="guesswins" default=0>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-    </select>
-    <label for="{{ player.name + 'wins' }}">Wins: </label>
-    <select class="wins" id="{{ player.name + 'wins' }}" name="{{ player.name + 'wins' }}" form="guesswins">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-    </select>
-    {% endfor %}
-    <button type="submit" id="add-round" name="add-round" value="Add round">Add round</button>
-</form>
 
-<button type="button" id="endgame" name="endgame" value="End Game" data-toggle="modal" data-target="warning" 
-  onclick="$(document).ready(function() {
-    $('#warning').modal('show')
-    $('#warning').modal(options);
-  });">End Game</button>
-
-<br>
-
-<table id="scores-table">
-  {% for player in players %}
-  <tr>
-      <th>{{ player.name }}</th>
-      <td>{{ totals[player] }}</td>
-  </tr>
-  {% endfor %}
-</table>
 
 <div class="modal fade" id="warning" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -138,8 +162,6 @@
         $('#modal').modal('show')
         $('#modal').modal(options);
     });
-    $(document).ready( function() {
-      setTimeout(sortTable(document.getElementById('scores-table')), 100);
-    })
+
 </script>
 {% endblock %}

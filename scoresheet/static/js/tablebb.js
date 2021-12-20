@@ -1,3 +1,16 @@
+function Toep(id) {
+    if (id == 0) {
+    var tab = document.getElementsById("toep-btns");
+    }
+    else {
+        var tab = document.getElementById(id).parentElement.parentElement;
+    }
+    var on = tab.querySelectorAll("[style='display: block;']"),
+        off = tab.querySelectorAll("[style='display: none']");
+    on.setAttribute("style", "display: none");
+    off.setAttribute("style", "display: block")
+}
+
 function Add_Game() {
     game_form = document.getElementById('game_form');
     player_form = document.getElementById('player_form');
@@ -10,11 +23,13 @@ function EndGame() {
     var scores_table = document.getElementById("bb-scoresheet"),
         form = document.getElementById("guesswins"),
         btn = document.getElementById("endgame"),
+        btn2 = document.getElementById("add-round"),
         totals = document.getElementById("scores-table"),
         newgame = document.getElementById("newgame");
     scores_table.setAttribute("style", "display: none;");
     form.setAttribute("style", "display: none;");
     btn.setAttribute("style", "display: none;");
+    btn2.setAttribute("style", "display: none;");
     totals.setAttribute("style", "text-align: center;")
     newgame.setAttribute("style", "display: block;")
     var winner = document.getElementById("scores-table").rows[0].getElementsByTagName("th")[0].innerHTML;
@@ -199,7 +214,8 @@ function deleteColumns() {
 }
 
 function sortTable(table) {
-    var table, rows, switching, i, x, y, shouldSwitch;
+    var table = document.getElementById('scores-table');
+    var rows, switching, i, x, y, shouldSwitch;
     switching = true;
     /* Make a loop that will continue until
     no switching has been done: */
@@ -207,15 +223,14 @@ function sortTable(table) {
       // Start by saying: no switching is done:
       switching = false;
       rows = table.rows;
-      /* Loop through all table rows (except the
-      first, which contains table headers): */
+      /* Loop through all table rows: */
       for (i = 0; i < (rows.length - 1); i++) {
         // Start by saying there should be no switching:
         shouldSwitch = false;
         /* Get the two elements you want to compare,
         one from current row and one from the next: */
-        x = rows[i].getElementsByTagName("td")[1];
-        y = rows[i + 1].getElementsByTagName("td")[1];
+        x = rows[i].getElementsByTagName("td")[0];
+        y = rows[i + 1].getElementsByTagName("td")[0];
         // Check if the two rows should switch place:
         if (parseInt(x.innerHTML, 10) < parseInt(y.innerHTML, 10)) {
           // If so, mark as a switch and break the loop:

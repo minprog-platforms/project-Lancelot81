@@ -13,7 +13,7 @@ from . import db
 views = Blueprint('views', __name__)
 
 
-@views.route('/toepen', methods=['GET', 'POST'])
+@views.route('/toepen', methods=['GET', 'POST', 'PUT'])
 @login_required
 def toepen():
     """ Let's the player play Toepen """
@@ -21,6 +21,7 @@ def toepen():
         pass
 
     current_game = current_user.id
+    current_bet = 1
 
     # Only players still alive can play the next rounds
     alive_players = Player.query.filter_by(game_id=current_game, status_in=True)
@@ -55,6 +56,10 @@ def toepen():
 
     # Fetch all players in this game
     players = Player.query.filter_by(game_id=current_game).all()
+
+    if request.method == 'PUT':
+        for player in players:
+            if request.form.get()
     
     # Set the playing flag: once the game starts, no more players can be added
     if any(player.scores[0].score != 0 for player in players):
@@ -62,13 +67,13 @@ def toepen():
     else:
         playing = False
 
-    return render_template('toep.html', alive=alive_players, players=players, playing=playing, user=current_user)
+    return render_template('toep.html', alive=alive_players, players=players, playing=playing, user=current_user, current_bet=current_bet)
 
 
 @views.route('/logout')
 @login_required
 def logout():
-    """ Used to logout user, redirects to homepage """
+    """ Only used to logout user, redirects to homepage """
     logout_user()
     return redirect(url_for('views.home'))
 

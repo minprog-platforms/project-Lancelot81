@@ -55,10 +55,26 @@
     </tr>
     <tr>
         {% for player in players %}
-        <td></td>
+        <td>
+          <button type="button" class="toep-btns" onclick="Toep(0)" style="display: block;">Toep!</button>
+          <form action="/toepen" class="toep-btns" method="put" id="{{ player.name + 'in' }}" style="display: none;">
+            <button type="submit" id="{{ player.name + 'in' }}" name="{{ player.name + 'in' }}" onclick="Toep(this.id)" value="In">In</button>
+          </form>
+          <br>
+          <form action="/toepen" class="toep-btns" method="put" id="{{ player.name + 'winner' }}" style="display: block;">
+            <button type="submit" id="{{ player.name + 'winner' }}" name="{{ player.name + 'winner' }}" value="Winner">Winner</button>
+          </form>
+          <form action="/toepen" class="toep-btns" method="put" id="{{ player.name + 'out' }}" style="display: none;">
+            <button type="submit" id="{{ player.name + 'out' }}" name="{{ player.name + 'out' }}" onclick="Toep(this.id)" value="Out">Out</button>
+          </form>
+          
+        </td>
         {% endfor %}
     </tr>
 </table>
+
+<br>
+Current bet: {{ current_bet }}
 
 {% endblock %}
 

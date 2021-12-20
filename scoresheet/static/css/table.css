@@ -94,4 +94,35 @@ table { border-collapse: collapse; }
     background-color: grey;
     color: white;
 }
-  
+
+
+/* make the header float */
+#bb-scoresheet table {
+    border: 0;
+    padding: 0;
+    margin: 0 0 20px 0;
+    border-collapse: collapse;
+}
+#bb-scoresheet th {
+    padding: 5px;
+   /* NOTE: th padding must be set explicitly in order to support IE */
+    text-align: right;
+    font-weight: bold;
+    line-height: 4em;
+    color: #fff;
+    background-color: #555;
+}
+#bb-scoresheet tbody td {
+    padding: 10px;
+    line-height: 18px;
+    border-top: 1px solid #e0e0e0;
+}
+#bb-scoresheet tbody tr:nth-child(2n) {
+    background-color: #f7f7f7;
+}
+#bb-scoresheet td {
+    text-align: right;
+}
+#bb-scoresheet td:first-child, #bb-scoresheet th:first-child {
+    text-align: left;
+}
