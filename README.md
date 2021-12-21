@@ -39,10 +39,13 @@ Other ways to deploy this project are:
 ```
  .
  ┣ doc
+ ┃ ┣ Bridge.png
+ ┃ ┣ Homepage.png
  ┃ ┣ projectSketch1.jpg
  ┃ ┣ projectSketch2.jpg
  ┃ ┣ projectSketch3.jpg
- ┃ ┗ projectSketch4.jpg
+ ┃ ┣ projectSketch4.jpg
+ ┃ ┗ Toepen.png
  ┣ scoresheet
  ┃ ┣ static
  ┃ ┃ ┣ css
@@ -71,13 +74,13 @@ Other ways to deploy this project are:
 ## The application (screenshots)
 The application contains three different pages:
 * The Homepage
-<img src="doc/Homepage.png" alt="Homepage screenshot" width="200"/>
+<img src="doc/Homepage.png" alt="Homepage screenshot" style="width:500px;"/>
 
 * A page for Bridge
-<img src="doc/Bridge.png" alt="Bridge screenshot" width="200"/>
+<img src="doc/Bridge.png" alt="Bridge screenshot" style="width:500px;"/>
 
 * A page for Toepen
-<img src="doc/Toepen.png" alt="Toepen screenshot" width="200"/>
+<img src="doc/Toepen.png" alt="Toepen screenshot" style="width:500px;"/>
 
 
 ## Acknowledgements
@@ -92,13 +95,13 @@ The application contains three different pages:
 The following sketches were made during the early stages of the project.
 
 The application will have a homepage where one can choose the type of game.
-<img src="doc/projectSketch1.png" alt="Homepage and a game scoresheet sketch" width="200"/>
+<img src="doc/projectSketch1.jpg" alt="Homepage and a games scoresheet sketch" style="width:500px;"/>
 
 A simple bridge scoresheet will have the user input all players guesses and actual wins. Scores will be calculated automatically.
-<img src="doc/projectSketch2.png" alt="Bridge scoresheet sketch" width="200"/>
+<img src="doc/projectSketch2.jpg" alt="Bridge scoresheet sketch" style="width:500px;"/>
 
 All pages will include a rankings table, where the players total points are shown in order of ranking. The scoresheet for toepen will look something like this.
-<img src="doc/projectSketch3.png" alt="Toepen scoresheet sketch" width="200"/>
+<img src="doc/projectSketch3.jpg" alt="Toepen scoresheet sketch" style="width:500px;"/>
 
 The application will support mobile!
-<img src="doc/projectSketch4.png" alt="Mobile support" width="200"/>
+<img src="doc/projectSketch4.jpg" alt="Mobile support" style="width:500px;"/>
