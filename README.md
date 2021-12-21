@@ -18,6 +18,35 @@ The app will also contain some custom scoresheets, which can be used when player
 * The hardest part of the application will to implement a database which stores game scores.
 * A similar scorsheets web application is has been made for [dice games](http://www.playonlinedicegames.com/scoresheet). However, it does not make use of a database for scores, thus scores are lost after page refresh. A simple scoresheet application can also be found in the [Play Store](https://play.google.com/store/apps/details?id=de.einedigitalewelt.spielblock&hl=nl&gl=US), but it requires the user to download an app.
 
+## Repository structure
+
+ .
+ ┣ doc
+ ┃ ┣ projectSketch1.jpg
+ ┃ ┣ projectSketch2.jpg
+ ┃ ┣ projectSketch3.jpg
+ ┃ ┗ projectSketch4.jpg
+ ┣ scoresheet
+ ┃ ┣ static
+ ┃ ┃ ┣ css
+ ┃ ┃ ┃ ┣ sticky-footer-navbar.css
+ ┃ ┃ ┃ ┗ table.css
+ ┃ ┃ ┗ js
+ ┃ ┃ ┃ ┗ tablebb.js
+ ┃ ┣ templates
+ ┃ ┃ ┣ base.html
+ ┃ ┃ ┣ bridge.html
+ ┃ ┃ ┣ home.html
+ ┃ ┃ ┗ toep.html
+ ┃ ┣ __pycache__
+ ┃ ┣ models.py
+ ┃ ┣ views.py
+ ┃ ┗ __init__.py
+ ┣ Dockerfile
+ ┣ main.py
+ ┣ README.md
+ ┗ requirements.txt
+
 ## Sketch
 
 The application will have a homepage where one can choose the type of game.

@@ -33,7 +33,7 @@ def create_app():
 
     app.register_blueprint(views, url_prefix='/')
 
-    from .models2 import Game, Round, Player, Score
+    from .models import Game, Round, Player, Score
 
     create_database(app)
 

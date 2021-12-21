@@ -5,7 +5,7 @@ Uses GET and POST methods to interact with the database
 
 from flask import Flask, render_template, request, url_for, redirect, flash, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
-from .models2 import Game, Round, Player, Score, calculate_score
+from .models import Game, Round, Player, Score, calculate_score
 from . import db
 
 
@@ -57,9 +57,9 @@ def toepen():
     # Fetch all players in this game
     players = Player.query.filter_by(game_id=current_game).all()
 
-    if request.method == 'PUT':
-        for player in players:
-            if request.form.get()
+    # if request.method == 'PUT':
+    #     for player in players:
+    #         if request.form.get()
     
     # Set the playing flag: once the game starts, no more players can be added
     if any(player.scores[0].score != 0 for player in players):
