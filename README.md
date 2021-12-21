@@ -7,7 +7,6 @@ be it a pen and a piece of paper or a very easy-to-use web application!
 
 In this web application, one can choose between multiple tabs containing different cardgames.
 On these tabs, specifically designed for these games, it will be very easy for the user to track scores.
-The app will also contain some custom scoresheets, which can be used when players require a different way to track scores.
 
 
 ## Author
