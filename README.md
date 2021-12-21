@@ -13,6 +13,16 @@ The app will also contain some custom scoresheets, which can be used when player
 
 - [@Lancelot81](https://www.github.com/Lancelot81)
 
+## Deployment
+
+Their are multiple ways to run this project. First of all, the project can be found on [my website](http://lanceop.northeurope.cloudapp.azure.com), but the server might not always be running.
+
+Other ways to deploy this project are:
+* Using Flask: `flask run scoresheet`
+* Using Python: `python main.py`
+* Using docker: the image can be pulled using `docker pull lance81/cardgame-scoresheets`, it can be run locally using the `docker run` command.
+
+
 ## Prerequisites
 
 * Data sources:
@@ -42,17 +52,28 @@ The app will also contain some custom scoresheets, which can be used when player
  ┃ ┃ ┣ bridge.html
  ┃ ┃ ┣ home.html
  ┃ ┃ ┗ toep.html
- ┃ ┣ __pycache__
  ┃ ┣ models.py
  ┃ ┣ views.py
  ┃ ┗ __init__.py
+ ┣ ASSESSMENT.md
  ┣ Dockerfile
+ ┣ LICENSE
  ┣ main.py
  ┣ README.md
- ┗ requirements.txt
+ ┣ requirements.txt
+ ┗ REVIEW.md
 ```
 
+## Acknowledgements
+
+ - [Responsice HTML tables](https://www.redips.net/javascript/adding-table-rows-and-columns/)
+ - [Awesome Python Website tutorial on YouTube](https://www.youtube.com/watch?v=dam0GPOAvVI&t=4262s&ab_channel=TechWithTim)
+ - Special thanks to [Quinten van der Post](https://github.com/Qvdpost) for supervising me during this project!
+
+
 ## Sketch
+
+The following sketches were made during the early stages of the project.
 
 The application will have a homepage where one can choose the type of game.
 ![Homepage and a games scoresheet](doc/projectSketch1.jpg)

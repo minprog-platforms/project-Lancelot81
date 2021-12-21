@@ -1,22 +1,12 @@
-function Toep(id) {
-    if (id == 0) {
-    var tab = document.getElementsById("toep-btns");
-    }
-    else {
-        var tab = document.getElementById(id).parentElement.parentElement;
-    }
-    var on = tab.querySelectorAll("[style='display: block;']"),
-        off = tab.querySelectorAll("[style='display: none']");
-    on.setAttribute("style", "display: none");
-    off.setAttribute("style", "display: block")
-}
+/**
+ * This document contains a lot of JavaScript function.
+ * Although most are no longer in use for the application (it now mainly uses python and flask),
+ * they are still very useful for creating a similar static JS-dependent website.
+***/
 
-function Add_Game() {
-    game_form = document.getElementById('game_form');
-    player_form = document.getElementById('player_form');
-    game_form.setAttribute("style", "display: none;");
-    player_form.setAttribute("style", "display: block;");
-}
+/** Part I
+ * Functions which are still used
+ */
 
 function EndGame() {
     setTimeout('', 5000);
@@ -36,6 +26,69 @@ function EndGame() {
     alert("Winner: " + winner)
 }
 
+
+function Toep(id) {
+    if (id == 0) {
+    var tab = document.getElementsById("toep-btns");
+    }
+    else {
+        var tab = document.getElementById(id).parentElement.parentElement;
+    }
+    var on = tab.querySelectorAll("[style='display: block;']"),
+        off = tab.querySelectorAll("[style='display: none']");
+    on.setAttribute("style", "display: none");
+    off.setAttribute("style", "display: block")
+}
+
+
+function sortTable(table) {
+    var table = document.getElementById('scores-table');
+    var rows, switching, i, x, y, shouldSwitch;
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows: */
+      for (i = 0; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("td")[0];
+        y = rows[i + 1].getElementsByTagName("td")[0];
+        // Check if the two rows should switch place:
+        if (parseInt(x.innerHTML, 10) < parseInt(y.innerHTML, 10)) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+}
+
+
+
+/** Part II
+ * Functions which are no longer used
+ */
+
+function Add_Game() {
+    game_form = document.getElementById('game_form');
+    player_form = document.getElementById('player_form');
+    game_form.setAttribute("style", "display: none;");
+    player_form.setAttribute("style", "display: block;");
+}
+
+
 function SetupScoresTable(name) {
     var table = document.getElementById("scores-table"),
         table_row = table.insertRow(-1),
@@ -48,6 +101,7 @@ function SetupScoresTable(name) {
     table.appendChild(table_row);
 }
 
+
 setInterval(function TotalScores() {
     var total = document.getElementById("scores-table");
 
@@ -55,7 +109,9 @@ setInterval(function TotalScores() {
     sortTable(total);
 }, 5000)
 
+
 // Calculates score based on guess and actual wins
+// This function has been replaced by an equivalent python function
 function CalculateScore(gs, wns) {
     if (gs == wns) {
         return 6 + gs * 2
@@ -83,6 +139,12 @@ function addedMessage() {
     setTimeout(function() { document.getElementById("notification").style.display = 'none'; }, 1500)
 }
 
+
+
+/**
+ * All the following functions come from: https://www.redips.net/javascript/adding-table-rows-and-columns/
+ * Slight modifications may have been made.
+ */
 
 // append row to the HTML table
 function appendRow() {
@@ -212,37 +274,3 @@ function deleteColumns() {
         }
     }
 }
-
-function sortTable(table) {
-    var table = document.getElementById('scores-table');
-    var rows, switching, i, x, y, shouldSwitch;
-    switching = true;
-    /* Make a loop that will continue until
-    no switching has been done: */
-    while (switching) {
-      // Start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /* Loop through all table rows: */
-      for (i = 0; i < (rows.length - 1); i++) {
-        // Start by saying there should be no switching:
-        shouldSwitch = false;
-        /* Get the two elements you want to compare,
-        one from current row and one from the next: */
-        x = rows[i].getElementsByTagName("td")[0];
-        y = rows[i + 1].getElementsByTagName("td")[0];
-        // Check if the two rows should switch place:
-        if (parseInt(x.innerHTML, 10) < parseInt(y.innerHTML, 10)) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-      if (shouldSwitch) {
-        /* If a switch has been marked, make the switch
-        and mark that a switch has been done: */
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-      }
-    }
-  }
