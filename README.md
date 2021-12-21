@@ -67,7 +67,7 @@ Other ways to deploy this project are:
 ## Acknowledgements
 
  - [Responsice HTML tables](https://www.redips.net/javascript/adding-table-rows-and-columns/)
- - [Awesome Python Website tutorial on YouTube](https://www.youtube.com/watch?v=dam0GPOAvVI&t=4262s&ab_channel=TechWithTim)
+ - [Awesome Python Website tutorial on YouTube](https://www.youtube.com/watch?v=dam0GPOAvVI)
  - Special thanks to [Quinten van der Post](https://github.com/Qvdpost) for supervising me during this project!
 
 
