@@ -15,7 +15,7 @@ The app will also contain some custom scoresheets, which can be used when player
 
 ## Deployment
 
-Their are multiple ways to run this project. First of all, the project can be found on [my website](http://lanceop.northeurope.cloudapp.azure.com), but the server might not always be running.
+Their are multiple ways to run this project. First of all, the project can be found on [my website](https://lanceops.northeurope.cloudapp.azure.com), but the server might not always be running.
 
 Other ways to deploy this project are:
 * Using Flask: `flask run scoresheet`
