@@ -26,7 +26,6 @@ def game():
         return redirect(url_for('views.toepen'))
 
 
-
 @views.route('/toepen', methods=['GET', 'POST', 'PUT'])
 @login_required
 def toepen():
@@ -118,12 +117,12 @@ def toepen():
                         db.session.commit()
                         scores_dict[other.id] += current_bet
                 for everyone in alive_players:
-                        everyone.status_in = True
-                        db.session.commit()
-                
+                    everyone.status_in = True
+                    db.session.commit()
+
                 # Set current bet to 1 to initialize new round
                 Round.query.filter_by(game_id=current_game).first().round_nm = 1
-                break 
+                break
 
         # Check if only one player is left in the round
         in_players = Player.query.filter_by(game_id=current_game, status_in=True).all()
@@ -148,7 +147,6 @@ def toepen():
     if len(alive_players) == 1:
         flash(alive_players[0].name + " won the game!", category='succes')
 
-
     playing = False
     # Set the playing flag: once the game starts, no more players can be added
     if toep_flag:
@@ -165,7 +163,7 @@ def toepen():
     db.session.commit()
     try:
         current_bet = Round.query.filter_by(game_id=current_game).first().round_nm
-    except:
+    except AttributeError:
         current_bet = 1
 
     return render_template('toep.html', alive=alive_players, players=players, toep=toep_flag,
