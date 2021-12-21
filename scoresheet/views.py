@@ -3,7 +3,7 @@ Contains all routes for the application
 Uses GET and POST methods to interact with the database
 """
 
-from flask import Flask, render_template, request, url_for, redirect, flash, Blueprint
+from flask import render_template, request, url_for, redirect, flash, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import Game, Round, Player, Score, calculate_score
 from . import db
@@ -60,14 +60,15 @@ def toepen():
     # if request.method == 'PUT':
     #     for player in players:
     #         if request.form.get()
-    
+
     # Set the playing flag: once the game starts, no more players can be added
     if any(player.scores[0].score != 0 for player in players):
         playing = True
     else:
         playing = False
 
-    return render_template('toep.html', alive=alive_players, players=players, playing=playing, user=current_user, current_bet=current_bet)
+    return render_template('toep.html', alive=alive_players, players=players,
+                           playing=playing, user=current_user, current_bet=current_bet)
 
 
 @views.route('/logout')
@@ -149,13 +150,14 @@ def bridge():
         playing = False
     else:
         playing = True
-    
-    return render_template('bridge.html', players=players, rounds=rounds, scores=scores, playing=playing, totals=totals, user=current_user)
+
+    return render_template('bridge.html', players=players, rounds=rounds,
+                           scores=scores, playing=playing, totals=totals, user=current_user)
 
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
-    """ 
+    """
     Homepage
     Let's the player choose and name their game
     """
@@ -187,6 +189,5 @@ def home():
                 return redirect(url_for('views.bridge'))
             elif gametype == 'toepen':
                 return redirect(url_for('views.toepen'))
-    
-    return render_template('home.html', user=current_user)
 
+    return render_template('home.html', user=current_user)

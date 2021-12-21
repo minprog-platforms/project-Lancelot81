@@ -40,7 +40,7 @@ class Score(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey('game.id'))
     round_id = db.Column(db.Integer, db.ForeignKey('round.id'))
     player_id = db.Column(db.Integer, db.ForeignKey('player.id'))
-    
+
 
 # Calculates score based on guess and wins
 def calculate_score(guess, wins):
