@@ -9,6 +9,10 @@ In this web application, one can choose between multiple tabs containing differe
 On these tabs, specifically designed for these games, it will be very easy for the user to track scores.
 The app will also contain some custom scoresheets, which can be used when players require a different way to track scores.
 
+## Author
+
+- [@Lancelot81](https://www.github.com/Lancelot81)
+
 ## Prerequisites
 
 * Data sources:
@@ -19,7 +23,7 @@ The app will also contain some custom scoresheets, which can be used when player
 * A similar scorsheets web application is has been made for [dice games](http://www.playonlinedicegames.com/scoresheet). However, it does not make use of a database for scores, thus scores are lost after page refresh. A simple scoresheet application can also be found in the [Play Store](https://play.google.com/store/apps/details?id=de.einedigitalewelt.spielblock&hl=nl&gl=US), but it requires the user to download an app.
 
 ## Repository structure
-
+```
  .
  ┣ doc
  ┃ ┣ projectSketch1.jpg
@@ -46,6 +50,7 @@ The app will also contain some custom scoresheets, which can be used when player
  ┣ main.py
  ┣ README.md
  ┗ requirements.txt
+```
 
 ## Sketch
 
