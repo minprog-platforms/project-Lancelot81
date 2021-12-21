@@ -80,16 +80,19 @@
           {% endif %}       
         </td>
         {% endfor %}
-        {% if toep %}
-        <form action="/toepen" method="POST" id="inorout"></form>
-          <button type="submit" form="inorout">Submit</button>
-        </form>
-        {% endif %}
     </tr>
 </table>
+{% if toep %}
+<div style="text-align: center;">
+<form action="/toepen" method="POST" id="inorout"></form>
+  <button type="submit" form="inorout">Submit</button>
+</form>
+</div>
+{% endif %}
+<div style="text-align: center; font-size: large; font-weight: bold;">
+  Current bet: {{ current_bet }}
+</div>
 
-<br>
-Current bet: {{ current_bet }}
 
 {% endblock %}
 

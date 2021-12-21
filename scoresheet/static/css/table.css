@@ -1,18 +1,35 @@
-table { border-collapse: collapse; }
-.vertical td {
-    border: 1px solid black; 
+table { 
+    border-collapse: collapse;
+    margin: 15px;
 }
-.vertical th {
+td {
+    border: 1px solid black; 
+    padding: 10px;
+}
+th {
     border: 1px solid black;
     background-color: grey;
     color: white;
+    padding: 10px;
 }
 
+#toep-round th {
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 4em;
+    color: #fff;
+    background-color: #555;
+}
+#toep-round td {
+    text-align: center;
+}
 
-#bb-scoresheet table {
+#bb-scoresheet {
     border: 0;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin-right: auto;
+    margin-left: auto;
     border-collapse: collapse;
 }
 #bb-scoresheet th {
