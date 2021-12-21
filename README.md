@@ -71,13 +71,13 @@ Other ways to deploy this project are:
 ## The application (screenshots)
 The application contains three different pages:
 * The Homepage
-![Homepage screenshot](doc/Homepage.png)
+<img src="doc/Homepage.png" alt="Homepage screenshot" width="200"/>
 
 * A page for Bridge
-![Bridge screenshot](doc/Bridge.png)
+<img src="doc/Bridge.png" alt="Bridge screenshot" width="200"/>
 
 * A page for Toepen
-![Toepen screenshot](doc/Toepen.png)
+<img src="doc/Toepen.png" alt="Toepen screenshot" width="200"/>
 
 
 ## Acknowledgements
@@ -92,13 +92,13 @@ The application contains three different pages:
 The following sketches were made during the early stages of the project.
 
 The application will have a homepage where one can choose the type of game.
-![Homepage and a games scoresheet](doc/projectSketch1.jpg)
+<img src="doc/projectSketch1.png" alt="Homepage and a game scoresheet sketch" width="200"/>
 
 A simple bridge scoresheet will have the user input all players guesses and actual wins. Scores will be calculated automatically.
-![Bridge scoresheet](doc/projectSketch2.jpg)
+<img src="doc/projectSketch2.png" alt="Bridge scoresheet sketch" width="200"/>
 
 All pages will include a rankings table, where the players total points are shown in order of ranking. The scoresheet for toepen will look something like this.
-![Toepen scoresheet](doc/projectSketch3.jpg)
+<img src="doc/projectSketch3.png" alt="Toepen scoresheet sketch" width="200"/>
 
 The application will support mobile!
-![Mobile support](doc/projectSketch4.jpg)
+<img src="doc/projectSketch4.png" alt="Mobile support" width="200"/>
