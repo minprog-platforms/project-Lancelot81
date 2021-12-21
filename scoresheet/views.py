@@ -84,42 +84,70 @@ def toepen():
             alive_players.append(Player.query.filter_by(game_id=current_game, id=player_id).first())
 
     if request.method == 'POST':
-        for player in players:
+        for player in alive_players:
             # Did the player say toep?
             if request.form.get(player.name + 'toep') == 'Toep!':
                 toep_flag = True
                 current_bet = Round.query.filter_by(game_id=current_game).first().round_nm
                 Round.query.filter_by(game_id=current_game).first().round_nm = current_bet + 1
                 db.session.commit()
+
                 return render_template('toep.html', alive=alive_players, players=players, toep=toep_flag,
                                        playing=True, user=current_user, current_bet=current_bet, scores=scores_dict)
 
-            # Did the players go with the toep
+            # Did the players go with the toep?
             if request.form.get(player.name + 'inorout') == 'OUT':
-                player.scores[0].score = player.scores[0].score + current_bet
+                player.scores[0].score = player.scores[0].score + current_bet - 1
                 player.status_in = False
                 db.session.commit()
-                scores_dict[player.id] += current_bet
+
+                scores_dict[player.id] += current_bet - 1
             elif request.form.get(player.name + 'inorout') == 'IN':
-                pass
+                player.status_in = True
+                db.session.commit()
 
             # Check if someone won the round
             if request.form.get(player.name + 'winner') == 'Winner':
                 winner = player
+                flash(player.name + " won the round!", category='succes')
 
                 # If so, adjust player scores
-                for other in players:
+                for other in alive_players:
                     if other != winner and other.status_in:
                         other.scores[0].score = other.scores[0].score + current_bet
                         db.session.commit()
                         scores_dict[other.id] += current_bet
-                    else:
-                        other.status_in = True
+                for everyone in alive_players:
+                        everyone.status_in = True
                         db.session.commit()
                 
                 # Set current bet to 1 to initialize new round
                 Round.query.filter_by(game_id=current_game).first().round_nm = 1
                 break 
+
+        # Check if only one player is left in the round
+        in_players = Player.query.filter_by(game_id=current_game, status_in=True).all()
+        if len(in_players) == 1:
+            winner = in_players[0]
+            flash(winner.name + " won the round!", category='succes')
+
+            # If so, adjust player scores
+            for other in alive_players:
+                other.status_in = True
+
+            # Set current bet to 1 to initialize new round
+            Round.query.filter_by(game_id=current_game).first().round_nm = 1
+            db.session.commit()
+
+        # Remake alive players list
+        alive_players = []
+        for player_id in scores_dict:
+            if scores_dict[player_id] < 15:
+                alive_players.append(Player.query.filter_by(game_id=current_game, id=player_id).first())
+
+    if len(alive_players) == 1:
+        flash(alive_players[0].name + " won the game!", category='succes')
+
 
     playing = False
     # Set the playing flag: once the game starts, no more players can be added
