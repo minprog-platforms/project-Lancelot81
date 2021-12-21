@@ -95,13 +95,17 @@ The application contains three different pages:
 The following sketches were made during the early stages of the project.
 
 The application will have a homepage where one can choose the type of game.
-<img src="doc/projectSketch1.jpg" alt="Homepage and a games scoresheet sketch" style="width:500px;"/>
+
+<img src="doc/projectSketch1.jpg" alt="Homepage and a games scoresheet sketch" style="width:400px;"/>
 
 A simple bridge scoresheet will have the user input all players guesses and actual wins. Scores will be calculated automatically.
-<img src="doc/projectSketch2.jpg" alt="Bridge scoresheet sketch" style="width:500px;"/>
+
+<img src="doc/projectSketch2.jpg" alt="Bridge scoresheet sketch" style="width:400px;"/>
 
 All pages will include a rankings table, where the players total points are shown in order of ranking. The scoresheet for toepen will look something like this.
-<img src="doc/projectSketch3.jpg" alt="Toepen scoresheet sketch" style="width:500px;"/>
+
+<img src="doc/projectSketch3.jpg" alt="Toepen scoresheet sketch" style="width:400px;"/>
 
 The application will support mobile!
-<img src="doc/projectSketch4.jpg" alt="Mobile support" style="width:500px;"/>
+
+<img src="doc/projectSketch4.jpg" alt="Mobile support" style="width:400px;"/>
