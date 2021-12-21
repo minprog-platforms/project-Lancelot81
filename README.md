@@ -9,9 +9,11 @@ In this web application, one can choose between multiple tabs containing differe
 On these tabs, specifically designed for these games, it will be very easy for the user to track scores.
 The app will also contain some custom scoresheets, which can be used when players require a different way to track scores.
 
+
 ## Author
 
 - [@Lancelot81](https://www.github.com/Lancelot81)
+
 
 ## Deployment
 
@@ -31,6 +33,7 @@ Other ways to deploy this project are:
     * bootstrap for designing properties and buttons
 * The hardest part of the application will to implement a database which stores game scores.
 * A similar scorsheets web application is has been made for [dice games](http://www.playonlinedicegames.com/scoresheet). However, it does not make use of a database for scores, thus scores are lost after page refresh. A simple scoresheet application can also be found in the [Play Store](https://play.google.com/store/apps/details?id=de.einedigitalewelt.spielblock&hl=nl&gl=US), but it requires the user to download an app.
+
 
 ## Repository structure
 ```
@@ -63,6 +66,19 @@ Other ways to deploy this project are:
  ┣ requirements.txt
  ┗ REVIEW.md
 ```
+
+
+## The application (screenshots)
+The application contains three different pages:
+* The Homepage
+![Homepage screenshot](doc/Homepage.png)
+
+* A page for Bridge
+![Bridge screenshot](doc/Bridge.png)
+
+* A page for Toepen
+![Toepen screenshot](doc/Toepen.png)
+
 
 ## Acknowledgements
 
