@@ -10,6 +10,8 @@
 
 function EndGame() {
     setTimeout('', 5000);
+    var left_column = document.getElementsByClassName('col-sm')[0],
+        right_column = document.getElementsByClassName('col-sm')[1];
     var scores_table = document.getElementById("bb-scoresheet"),
         form = document.getElementById("guesswins"),
         btn = document.getElementById("endgame"),
@@ -21,7 +23,9 @@ function EndGame() {
     btn.setAttribute("style", "display: none;");
     btn2.setAttribute("style", "display: none;");
     totals.setAttribute("style", "text-align: center;")
+    left_column.remove();
     newgame.setAttribute("style", "display: block;")
+    right_column.setAttribute("style", "margin-right: auto; margin-left: auto; text-align: center;")
     var winner = document.getElementById("scores-table").rows[0].getElementsByTagName("th")[0].innerHTML;
     alert("Winner: " + winner)
 }
@@ -29,15 +33,19 @@ function EndGame() {
 
 function Toep(id) {
     if (id == 0) {
-    var tab = document.getElementsById("toep-btns");
+    var tab = document.getElementsByClassName("toep-btns");
     }
     else {
         var tab = document.getElementById(id).parentElement.parentElement;
     }
     var on = tab.querySelectorAll("[style='display: block;']"),
         off = tab.querySelectorAll("[style='display: none']");
-    on.setAttribute("style", "display: none");
-    off.setAttribute("style", "display: block")
+    for (element in on) {
+        element.setAttribute("style", "display: none");
+    }
+    for (element in off) {
+        element.setAttribute("style", "display: block")
+    }
 }
 
 

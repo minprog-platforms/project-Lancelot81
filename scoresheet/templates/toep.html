@@ -34,7 +34,7 @@
 </div>
 {% endif %}
 
-<table id="toep-scores">
+<table id="toep-scores" style="margin-left: auto; margin-right: auto;">
     <tr>
         {% for player in players %}
         <th>{{ player.name }}</th>
@@ -42,12 +42,12 @@
     </tr>
     <tr>
         {% for player in players %}
-        <th>{{ player.scores[0].score }}</th>
+        <td>{{ scores[player.id] }}</td>
         {% endfor %}
     </tr>    
 </table>
 
-<table id="toep-round">
+<table id="toep-round" style="margin-left: auto; margin-right: auto;">
     <tr>
         {% for player in players %}
         <th>{{ player.name }}</th>
@@ -56,20 +56,35 @@
     <tr>
         {% for player in players %}
         <td>
-          <button type="button" class="toep-btns" onclick="Toep(0)" style="display: block;">Toep!</button>
-          <form action="/toepen" class="toep-btns" method="put" id="{{ player.name + 'in' }}" style="display: none;">
-            <button type="submit" id="{{ player.name + 'in' }}" name="{{ player.name + 'in' }}" onclick="Toep(this.id)" value="In">In</button>
-          </form>
-          <br>
-          <form action="/toepen" class="toep-btns" method="put" id="{{ player.name + 'winner' }}" style="display: block;">
-            <button type="submit" id="{{ player.name + 'winner' }}" name="{{ player.name + 'winner' }}" value="Winner">Winner</button>
-          </form>
-          <form action="/toepen" class="toep-btns" method="put" id="{{ player.name + 'out' }}" style="display: none;">
-            <button type="submit" id="{{ player.name + 'out' }}" name="{{ player.name + 'out' }}" onclick="Toep(this.id)" value="Out">Out</button>
-          </form>
-          
+          {% if player in alive %}
+            {% if player.status_in %}
+              {% if toep %}
+              <input type="radio" id="{{ player.name + 'in' }}" name="{{ player.name + 'inorout' }}" value="IN" form="inorout">
+              <label for="{{ player.name + 'in' }}">IN</label> <br>
+              <input type="radio" id="{{ player.name + 'out' }}" name="{{ player.name + 'inorout' }}" value="OUT" form="inorout">
+              <label for="{{ player.name + 'out' }}">OUT</label>
+              {% else %}
+              <form action="/toepen" class="toep-btns" method="POST" id="{{ player.name + 'toep' }}" name="{{ player.name + 'toep' }}">
+                <button type="submit" class="toep-btns" id="{{ player.name + 'toep' }}" name="{{ player.name + 'toep' }}" value="Toep!" form="{{ player.name + 'toep' }}">Toep!</button>
+              </form>
+              <br>
+              <form action="/toepen" class="toep-btns" method="POST" id="{{ player.name + 'winner' }}">
+                <button type="submit" id="{{ player.name + 'winner' }}" name="{{ player.name + 'winner' }}" value="Winner" form="{{ player.name + 'winner' }}">Winner</button>
+              </form>
+              {% endif %}
+            {% else %}
+              OUT
+            {% endif %}
+          {% else %}
+            DEAD
+          {% endif %}       
         </td>
         {% endfor %}
+        {% if toep %}
+        <form action="/toepen" method="POST" id="inorout"></form>
+          <button type="submit" form="inorout">Submit</button>
+        </form>
+        {% endif %}
     </tr>
 </table>
 
@@ -78,6 +93,7 @@ Current bet: {{ current_bet }}
 
 {% endblock %}
 
+{% block foot %}Playing Toepen...{% endblock %}
 
 {% block script %}
 <script>

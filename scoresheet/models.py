@@ -15,6 +15,9 @@ class Game(db.Model, UserMixin):
     rounds = db.relationship('Round', cascade="all, delete")
     players = db.relationship('Player', cascade="all, delete")
 
+    def is_authenticated(self):
+        return True
+
 
 # Class containing a round of a game
 class Round(db.Model):

@@ -124,7 +124,13 @@
       </table>
     </div>
   </div>
+
+  <br>
+  <form action="/logout" id="newgame" style="display: none;">
+    <button type="submit" class="btn" value="New game">New Game</button>
+  </form>
 </div>
+
 
 
 
@@ -142,19 +148,16 @@
         </p>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="warning">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="warning" style="color: crimson;" onclick="EndGame()">End Game</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="warning" onclick="EndGame()">End Game</button>
       </div>
     </div>
   </div>
 </div>
 
-<br>
-<form action="/logout" id="newgame" style="display: none;">
-  <button type="submit" value="New game"></button>
-</form>
 
 {% endblock %}
 
+{% block foot %}Playing Boeren Bridge...{% endblock %}
 
 {% block script %}
 <script>

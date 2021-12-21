@@ -13,25 +13,40 @@ from . import db
 views = Blueprint('views', __name__)
 
 
+@views.route('/game')
+@login_required
+def game():
+    """ Redirect user to their game """
+    gametype = current_user.gametype
+
+    # Redirect user to corresponding gamepage
+    if gametype == 'bridge':
+        return redirect(url_for('views.bridge'))
+    elif gametype == 'toepen':
+        return redirect(url_for('views.toepen'))
+
+
+
 @views.route('/toepen', methods=['GET', 'POST', 'PUT'])
 @login_required
 def toepen():
     """ Let's the player play Toepen """
     if request.method == 'GET':
-        pass
+        current_bet = 1
 
     current_game = current_user.id
-    current_bet = 1
 
-    # Only players still alive can play the next rounds
-    alive_players = Player.query.filter_by(game_id=current_game, status_in=True)
+    # Flag if said Toep
+    toep_flag = False
 
     if request.method == 'POST':
-        new_round = Round(round_nm=0, game_id=current_game)
-        db.session.add(new_round)
-        db.session.commit()
+        if not Round.query.filter_by(game_id=current_game).first():
+            new_round = Round(round_nm=1, game_id=current_game)
+            db.session.add(new_round)
+            db.session.commit()
 
         round_id = Round.query.filter_by(game_id=current_game).first().id
+        current_bet = Round.query.filter_by(game_id=current_game).first().round_nm
 
         # Add players if this was requested
         if request.form.get('add-player') == "Add player":
@@ -48,7 +63,7 @@ def toepen():
                 db.session.add(new_player)
                 db.session.commit()
 
-                player_id = Player.query.filter_by(name=player_name).first().id
+                player_id = Player.query.filter_by(name=player_name, game_id=current_game).first().id
 
                 new_score = Score(score=0, game_id=current_game, round_id=round_id, player_id=player_id)
                 db.session.add(new_score)
@@ -57,18 +72,76 @@ def toepen():
     # Fetch all players in this game
     players = Player.query.filter_by(game_id=current_game).all()
 
-    # if request.method == 'PUT':
-    #     for player in players:
-    #         if request.form.get()
+    # Set up a dict containing player scores
+    scores_dict = {}
+    for score in Score.query.filter_by(game_id=current_game).all():
+        scores_dict[score.player_id] = score.score
 
+    # Only players still alive can play the next rounds
+    alive_players = []
+    for player_id in scores_dict:
+        if scores_dict[player_id] < 15:
+            alive_players.append(Player.query.filter_by(game_id=current_game, id=player_id).first())
+
+    if request.method == 'POST':
+        for player in players:
+            # Did the player say toep?
+            if request.form.get(player.name + 'toep') == 'Toep!':
+                toep_flag = True
+                current_bet = Round.query.filter_by(game_id=current_game).first().round_nm
+                Round.query.filter_by(game_id=current_game).first().round_nm = current_bet + 1
+                db.session.commit()
+                return render_template('toep.html', alive=alive_players, players=players, toep=toep_flag,
+                                       playing=True, user=current_user, current_bet=current_bet, scores=scores_dict)
+
+            # Did the players go with the toep
+            if request.form.get(player.name + 'inorout') == 'OUT':
+                player.scores[0].score = player.scores[0].score + current_bet
+                player.status_in = False
+                db.session.commit()
+                scores_dict[player.id] += current_bet
+            elif request.form.get(player.name + 'inorout') == 'IN':
+                pass
+
+            # Check if someone won the round
+            if request.form.get(player.name + 'winner') == 'Winner':
+                winner = player
+
+                # If so, adjust player scores
+                for other in players:
+                    if other != winner and other.status_in:
+                        other.scores[0].score = other.scores[0].score + current_bet
+                        db.session.commit()
+                        scores_dict[other.id] += current_bet
+                    else:
+                        other.status_in = True
+                        db.session.commit()
+                
+                # Set current bet to 1 to initialize new round
+                Round.query.filter_by(game_id=current_game).first().round_nm = 1
+                break 
+
+    playing = False
     # Set the playing flag: once the game starts, no more players can be added
-    if any(player.scores[0].score != 0 for player in players):
+    if toep_flag:
+        playing = True
+    elif current_bet > 1:
         playing = True
     else:
-        playing = False
+        for score in Score.query.filter_by(game_id=current_game).all():
+            if score.score != 0:
+                playing = True
+                break
 
-    return render_template('toep.html', alive=alive_players, players=players,
-                           playing=playing, user=current_user, current_bet=current_bet)
+    # Commit any unsaved changes
+    db.session.commit()
+    try:
+        current_bet = Round.query.filter_by(game_id=current_game).first().round_nm
+    except:
+        current_bet = 1
+
+    return render_template('toep.html', alive=alive_players, players=players, toep=toep_flag,
+                           playing=playing, user=current_user, current_bet=current_bet, scores=scores_dict)
 
 
 @views.route('/logout')
