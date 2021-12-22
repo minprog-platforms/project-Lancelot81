@@ -70,7 +70,11 @@ Other ways to deploy this project are:
 ```
 
 
-## The application (screenshots)
+## The application
+#### Screencast
+A screencast (in Dutch) explaining how to use my application can be found [here on YouTube](https://youtu.be/2vKpLJt8n_I).
+
+#### Some screenshots
 The application contains three different pages:
 * The Homepage
 <img src="doc/Homepage.png" alt="Homepage screenshot" style="width:500px;"/>
